@@ -15,20 +15,21 @@ func main() {
 	mux := http.NewServeMux()
 
 	// Define handler functions
-	mux.HandleFunc("/", nab)
-	mux.HandleFunc("/ascii-art", zai)
+	mux.HandleFunc("/", handel)
+	mux.HandleFunc("/ascii-art", getText)
 	cssHandler := http.FileServer(http.Dir("web/"))
 	mux.Handle("/web/", http.StripPrefix("/web/", cssHandler))
 
 	// Create a new HTTP server instance
+
+	fmt.Println("http://localhost:2004")
 	http.ListenAndServe(":2004", mux)
 
 	// Start the server
-	fmt.Println("Server listening on :2004")
 
 }
 
-func nab(w http.ResponseWriter, r *http.Request) {
+func handel(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.Error(w, "Wrong path WLLLAAAKKK!!!", http.StatusNotFound)
 		return
@@ -51,10 +52,10 @@ func nab(w http.ResponseWriter, r *http.Request) {
 }
 
 type ArtTemplate struct {
-	Madan string // فخر العرب
+	Arty string
 }
 
-func zai(w http.ResponseWriter, r *http.Request) {
+func getText(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
@@ -64,7 +65,7 @@ func zai(w http.ResponseWriter, r *http.Request) {
 	ban := r.FormValue("banne")
 	artText := asciiZ.AsciiART(text, ban)
 
-	finalart := ArtTemplate{Madan: artText}
+	finalart := ArtTemplate{Arty: artText}
 
 	tmpl, err := template.ParseFiles("templates/index.html")
 	if err != nil {
