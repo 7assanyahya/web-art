@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../web/purr.css">
+  <title>home</title>
+</head>
+
+<body>
+
+
+  <div class="inputbar">
+
+    <form method="POST" class="form" action="/ascii-art">
+
+      <select class="ban" name="banne" value="">
+        <option>standard</option>
+        <option>shadow</option>
+        <option>thinkertoy</option>
+      </select>
+
+      <textarea name="text" class="tex" required></textarea>
+      <button type="submit" class="san">SEND</button>
+
+    </form>
+  </div>
+
+
+  <div class="lodi" id="lood">
+    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+    <lord-icon
+        src="https://cdn.lordicon.com/rivoakkk.json"
+        trigger="loop"
+        colors="primary:#fff,secondary:#a866ee"
+        style="width:250px;height:250px">
+    </lord-icon>
+
+  </div>
+  
+  <div class="outputbar" id="outout">
+
+    <textarea class="out" id="Itextarea" rows="4" cols="50" id="output" readonly>{{ .Madan }}</textarea>
+
+  </div>
+
+  <div class="funcbar">
+    <button id="changeButton" class="can" id="changeButton">CLEAR</button>
+    <button class="cob" onclick="copyText()">COPY</button>
+    <input type="button" class="sev">
+  </div>
+
+</body>
+
+
+<script>
+
+  var textarea = document.getElementById("Itextarea");
+  var changeButton = document.getElementById("changeButton");
+
+  changeButton.addEventListener("click", function() {
+  outout.style.display = 'none';
+  lood.style.display = 'flex';
+  setTimeout(function() {
+    outout.style.display = 'flex';
+    lood.style.display = 'none';
+        textarea.value = "";
+    }, 3000);
+  });
+
+function copyText() {
+    // Get the textarea element
+    var textarea = document.getElementById("Itextarea");
+    // Select the text in the textarea
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); // For mobile devices
+    // Copy the selected text to the clipboard
+    document.execCommand("copy");
+  }
+</script>
+
+</html>
